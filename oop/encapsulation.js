@@ -1,25 +1,17 @@
-class Student {
+ class Car {
+    #speed = 100;
+    location= 'Tokyo japan'
+    constructor(name) {
+        this.name = name;
+    }
 
-  constructor() {
-    var name;
-    var marks;
-  }
-  getName() {
-    return this.name
-  }
-  setName(name) {
-    this.name = name;
-  }
-  getMarks() {
-    return this.marks;
-  }
-  setMarks(marks) {
-    this.marks = marks;
-  }
-
+    run(){
+        console.log(`I am ${this.name}. i am running ${this.#speed} mph. i live in ${this.location}`)
+    }
 }
 
-var stud = new Student();
-stud.setName("gowtam Kumar")
-stud.setMarks(26);
-console.log(stud.getMarks(), stud.getName());
+const carrun = new Car('Volvo')
+console.log(carrun)
+carrun.name = 'Bus'
+carrun.location= 'Bangaladesh'
+carrun.run()

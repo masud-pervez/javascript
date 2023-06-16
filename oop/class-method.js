@@ -1,4 +1,4 @@
-class Hero {
+ class Hero {
   constructor(name, power) {
     this.name = name;
     this.power = power;

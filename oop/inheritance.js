@@ -1,4 +1,4 @@
-class SmartDevice {
+ class SmartDevice {
     constructor(name, price) {
         this.name = name;
         this.price = price;

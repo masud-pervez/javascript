@@ -7,7 +7,6 @@ function Person(fName, lName) {
   };
 }
 
-const res = new Person("gow", "pal")
+const res = new Person("gow", "pal");
 
 console.log(res);
-
