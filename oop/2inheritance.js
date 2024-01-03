@@ -1,5 +1,6 @@
 // inheritance same boyshisto kono kisu alada class kore fala
 // then oi class ke need onujaye interit kora
+// super fun kore tar parent ke call kore and paramiter receive kore.
 
 class SmartDevice {
     constructor(name, price) {
