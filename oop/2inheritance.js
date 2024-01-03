@@ -1,4 +1,7 @@
- class SmartDevice {
+// inheritance same boyshisto kono kisu alada class kore fala
+// then oi class ke need onujaye interit kora
+
+class SmartDevice {
     constructor(name, price) {
         this.name = name;
         this.price = price;
