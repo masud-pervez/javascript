@@ -1,0 +1,30 @@
+### Get list of users
+GET  http://localhost:3900/users
+
+
+### Get user by Id
+GET  http://localhost:3900/users/1b8bcf28-c71f-4ecb-9845-151bc2735230
+
+
+### Create user
+POST http://localhost:3900/users
+Content-Type: application/json
+
+{
+  "username": "gowtamkumar",
+  "password": "1234567"
+}
+
+
+### Update user by Id
+PUT   http://localhost:3900/users/31106974-2f58-483c-9d91-a4428347d940
+Content-Type: application/json
+
+{
+  "email": "hiranmy@gmail.com"
+}
+
+
+### Delete User by Id
+DELETE  http://localhost:3900/users/9408a924-5122-471a-aa58-5e74248adb63
+
