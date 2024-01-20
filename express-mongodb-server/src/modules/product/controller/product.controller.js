@@ -52,8 +52,8 @@ exports.getActiveProducts = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc Get a single Product
-// @route /api/v1/Product/active
+// @desc Get a Product
+// @route /api/v1/Product/findbyname
 // @access public
 
 exports.getFindByName = asyncHandler(async (req, res, next) => {
@@ -66,6 +66,24 @@ exports.getFindByName = asyncHandler(async (req, res, next) => {
   return res.status(200).json({
     success: true,
     msg: `Find by product name ${req.params.id}`,
+    data: results,
+  });
+});
+
+// @desc queryhelper
+// @route /api/v1/Product/queryhelper
+// @access public
+
+exports.getQueryHelper = asyncHandler(async (req, res, next) => {
+  const results = await ProductModel.find().queryhelper("react");
+
+  if (!results) {
+    throw new ErrorResponse(`Resource not found of id #${req.params.id}`);
+  }
+
+  return res.status(200).json({
+    success: true,
+    msg: `Query by product name ${req.params.id}`,
     data: results,
   });
 });

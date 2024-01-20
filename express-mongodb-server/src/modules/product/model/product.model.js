@@ -26,4 +26,9 @@ productModel.statics.findByName = function () {
   return this.find({ name: /product/i });
 };
 
+// custom query helper
+productModel.query.queryhelper = function (name) {
+  return this.find({ name: new RegExp(name, "i") });
+};
+
 module.exports = model("products", productModel);
