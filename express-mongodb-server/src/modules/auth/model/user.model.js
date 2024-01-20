@@ -41,6 +41,12 @@ const userSchema = new Schema({
     type: Boolean,
     default: true,
   },
+  products: [
+    {
+      type: Schema.Types.ObjectId, //this is relation you can array of products by data populate
+      ref: "products",
+    },
+  ],
 });
 
 // encript is LockManager, passorid bcrypt

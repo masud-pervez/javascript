@@ -4,7 +4,6 @@ const morgan = require("morgan");
 const cors = require("cors");
 const logger = require("./src/middlewares/logger");
 const colors = require("colors");
-// const errorHandler = require("./src/middlewares/error.middleware");
 const errorHandler = require("./src/middlewares/errorHandler");
 const app = express();
 
@@ -14,7 +13,7 @@ const { connectDb } = require("./src/config/db");
 dotenv.config();
 
 // all routes
-const mainRoutes = require("./src/mainRoutes/routes");
+const mainRoutes = require("./src/routes/routes");
 
 // Connect to database
 if (process.env.NODE_ENV !== "test") {
