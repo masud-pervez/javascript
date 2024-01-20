@@ -17,33 +17,34 @@ exports.register = asyncHandler(async (req, res, next) => {
     success: true,
     msg: "Create a new Register",
     data: newUser,
-    token: token,
+    accessToken: token,
   });
 });
 
 // @desc Login User
 // @route /api/v1/auth/login
 // @access public
-exports.login = asyncHandler(async (req, res, next) => {
-  const { username, password, email } = req.body;
-  const oldUser = await User.findOne({ username: req.body.username });
-
-  if (!oldUser) {
-    throw new Error("User is not find");
+exports.login = async (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+    const oldUser = await User.findOne({ username });
+    if (oldUser) {
+      const isMatch = await oldUser.mathchPassword(password);
+      if (isMatch) {
+        const token = oldUser.getSignJwtToken();
+        return res.status(200).json({
+          success: true,
+          msg: "login Successfull",
+          data: oldUser,
+          accessToken: token,
+        });
+      } else {
+        res.status(401).json({
+          error: "Authentication Faild",
+        });
+      }
+    }
+  } catch (err) {
+    next({ message: "something Error!" });
   }
-
-  const isMatch = await oldUser.mathchPassword(password);
-
-  if (!isMatch) {
-    throw new Error("User is not authenticated");
-  }
-
-  const token = oldUser.getSignJwtToken();
-
-  return res.status(200).json({
-    success: true,
-    msg: "login Successfull",
-    data: oldUser,
-    token: token,
-  });
-});
+};

@@ -8,10 +8,7 @@ const {
   deleteBootcamp,
 } = require("../controller/bootcamp.controller");
 
-router
-.route("/")
-.get(getBootcamps)
-.post(createBootcamp);
+router.route("/").get(getBootcamps).post(createBootcamp);
 
 router
   .route("/:id")

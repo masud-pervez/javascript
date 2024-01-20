@@ -33,10 +33,9 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc Get a single Product
+// @desc Get a single Active Product
 // @route /api/v1/Product/active
 // @access public
-
 exports.getActiveProducts = asyncHandler(async (req, res, next) => {
   const activeProduct = new ProductModel();
   const results = await activeProduct.findActive();
@@ -87,6 +86,7 @@ exports.getQueryHelper = asyncHandler(async (req, res, next) => {
     data: results,
   });
 });
+
 // @desc create a single Product
 // @route /api/v1/Product/:id
 // @access public

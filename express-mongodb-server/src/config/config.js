@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 const path = require("path");
 const Joi = require("joi");
-const { env_mode } = require("../enums/common.enum");
+// const { env_mode } = require("../enums/common.enum");
 
 dotenv.config({ path: path.join(__dirname, "../../.env") });
 
@@ -29,8 +29,7 @@ const configEnvSchema = Joi.object()
       .default(7)
       .required()
       .description("days after which cookie expire"),
-    DB_BACKUP_PATH: Joi.string()
-      .description("Database file backup path"),
+    DB_BACKUP_PATH: Joi.string().description("Database file backup path"),
     UPLOAD_PATH: Joi.string().required().description("File/photo upload path"),
     MAX_FILE_UPLOAD: Joi.number()
       .default(1000000)

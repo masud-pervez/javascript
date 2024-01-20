@@ -9,28 +9,34 @@ const userSchema = new Schema({
     type: String,
     required: [true, "please enter your  name"],
   },
+
   username: {
     type: String,
     unique: true,
     required: [true, "please Enter Your username"],
   },
+
   email: {
     type: String,
     unique: true,
+    lowercase: [true, "email already exists!"],
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       "please add a valid email",
     ],
   },
+
   password: {
     type: String,
     required: [true, "please Enter Your password"],
   },
+
   role: {
     type: String,
     required: [true, "please Add a role"],
     enum: ["Admin", "Employee"],
   },
+
   status: {
     type: Boolean,
     default: true,
@@ -44,9 +50,13 @@ userSchema.pre("save", async function () {
 
 // jwt by token
 userSchema.methods.getSignJwtToken = function () {
-  return jwt.sign({ _id: this._id }, envConfig.JWT_SECRET, {
-    expiresIn: envConfig.JWT_EXPIRES,
-  });
+  return jwt.sign(
+    { _id: this._id, username: this.username },
+    envConfig.JWT_SECRET,
+    {
+      expiresIn: envConfig.JWT_EXPIRES,
+    }
+  );
 };
 
 // hash password by conpare
