@@ -1,7 +1,5 @@
 const asyncHandler = require("../../../middlewares/async.middleware");
-const ErrorResponse = require("../../../utils/errorResponse");
 const User = require("../model/user.model");
-const { mathchPassword } = require("../../../middlewares/auth.middleware");
 
 // @desc Register User
 // @route /api/v1/auth/register
@@ -10,7 +8,7 @@ exports.register = asyncHandler(async (req, res, next) => {
   const findUser = await User.findOne({ username: req.body.username });
 
   if (findUser) {
-    throw new ErrorResponse("User already registered");
+    throw new Error("User already registered");
   }
   const newUser = await User.create(req.body);
   const token = newUser.getSignJwtToken();
@@ -31,18 +29,18 @@ exports.login = asyncHandler(async (req, res, next) => {
   const oldUser = await User.findOne({ username: req.body.username });
 
   if (!oldUser) {
-    throw new ErrorResponse("User is not find");
+    throw new Error("User is not find");
   }
 
   const isMatch = await oldUser.mathchPassword(password);
 
   if (!isMatch) {
-    throw new ErrorResponse("User is not authenticated");
+    throw new Error("User is not authenticated");
   }
 
   const token = oldUser.getSignJwtToken();
 
-  return res.status(201).json({
+  return res.status(200).json({
     success: true,
     msg: "login Successfull",
     data: oldUser,
