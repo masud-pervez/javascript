@@ -61,3 +61,17 @@ exports.login = asyncHandler(async (req, res, next) => {
     accessToken: token,
   });
 });
+
+// @desc Login User
+// @route /api/v1/auth/login
+// @access public
+
+exports.getMe = asyncHandler(async (req, res, next) => {
+  console.log("🚀 ~ req:", req)
+
+  return res.status(200).json({
+    success: true,
+    msg: "login Successfull",
+    data: {},
+  });
+});

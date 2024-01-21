@@ -72,7 +72,7 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
 // @access public
 exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
   const bootcamp = await bootcampModel.deleteOne({ _id: req.params.id });
-  console.log("🚀 ~ bootcamp:", bootcamp)
+  console.log("🚀 ~ bootcamp:", bootcamp);
 
   if (!bootcamp) {
     throw new ErrorResponse(`Resource not found of id #${req.params.id}`);
