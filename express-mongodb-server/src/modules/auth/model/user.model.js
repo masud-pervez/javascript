@@ -44,7 +44,7 @@ const userSchema = new Schema({
   products: [
     {
       type: Schema.Types.ObjectId, //this is relation you can array of products by data populate
-      // ref: "products",
+      ref: "products",
     },
   ],
 });
@@ -57,7 +57,13 @@ userSchema.pre("save", async function () {
 // jwt by token
 userSchema.methods.getSignJwtToken = function () {
   return jwt.sign(
-    { _id: this._id, username: this.username },
+    {
+      _id: this._id,
+      name: this.name,
+      username: this.username,
+      role: this.role,
+      status: this.status,
+    },
     envConfig.JWT_SECRET,
     {
       expiresIn: envConfig.JWT_EXPIRES,

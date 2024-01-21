@@ -16,7 +16,7 @@ const productModel = new Schema({
   },
   user: {
     type: Schema.Types.ObjectId, //this is relation you can single user by data populate
-    // ref: "users",
+    ref: "users",
   },
 });
 
