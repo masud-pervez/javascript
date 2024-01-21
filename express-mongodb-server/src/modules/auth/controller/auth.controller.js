@@ -67,11 +67,14 @@ exports.login = asyncHandler(async (req, res, next) => {
 // @access public
 
 exports.getMe = asyncHandler(async (req, res, next) => {
-  console.log("🚀 ~ req:", req)
+  const user = await User.findById({ _id: req._id });
+  if (!user) {
+    throw new Error("Authorization is not Valid!");
+  }
 
   return res.status(200).json({
     success: true,
-    msg: "login Successfull",
-    data: {},
+    msg: "Get Me Successfull",
+    data: user,
   });
 });

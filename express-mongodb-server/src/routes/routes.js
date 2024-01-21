@@ -8,5 +8,5 @@ const isAuthorize = require("../middlewares/authorize");
 module.exports = (app) => {
   app.use("/api/v1/bootcamp", AuthGuard, bootcamp);
   app.use("/api/v1/auth", auth);
-  app.use("/api/v1/products", AuthGuard, product);
+  app.use("/api/v1/products",AuthGuard, product);
 };

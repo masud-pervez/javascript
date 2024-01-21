@@ -5,12 +5,14 @@ const {
   getUsers,
   getMe,
 } = require("../controller/auth.controller");
+const AuthGuard = require("../../../middlewares/authGuard");
+const isAuthorize = require("../../../middlewares/authorize");
 
 const router = express.Router();
 
-router.route("/register").post(register);
-router.route("/login").post(login);
-router.route("/users").get(getUsers);
-router.route("/me").get(getMe);
+router.post("/register", register);
+router.post("/login", login);
+router.get("/users", AuthGuard, isAuthorize, getUsers);
+router.get("/me", AuthGuard, getMe);
 
 module.exports = router;

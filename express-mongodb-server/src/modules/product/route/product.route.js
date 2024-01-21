@@ -10,7 +10,6 @@ const {
   getFindByName,
   getQueryHelper,
 } = require("../controller/product.controller");
-const isAuthorize = require("../../../middlewares/authorize");
 
 router.route("/").get(getProducts).post(createProduct);
 router.route("/active").get(getActiveProducts);
