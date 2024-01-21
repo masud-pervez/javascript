@@ -1,5 +1,6 @@
 const ProductModel = require("../model/product.model");
 const userSchema = require("../../auth/model/user.model");
+const asyncHandler = require("../../../middlewares/async.middleware");
 
 // @desc Get all Product
 // @route /api/v1/Product
@@ -22,23 +23,20 @@ exports.getProducts = async (req, res, next) => {
 // @route /api/v1/Product/:id
 // @access public
 
-exports.getProduct = async (req, res, next) => {
-  try {
-    const result = await ProductModel.findOne({ _id: req.params.id });
+exports.getProduct = asyncHandler(async (req, res, next) => {
+  // try {
+  const result = await ProductModel.findOne({ _id: req.params.id });
 
-    if (!result) {
-      throw new Error(`Resource not found of id #${req.params.id}`);
-    }
-
-    return res.status(200).json({
-      success: true,
-      msg: `Get a single Product  of id ${req.params.id}`,
-      data: result,
-    });
-  } catch (err) {
-    next({ message: "something wrong!" });
+  if (!result) {
+    throw new Error(`Resource not found of id #${req.params.id}`);
   }
-};
+
+  return res.status(200).json({
+    success: true,
+    msg: `Get a single Product  of id ${req.params.id}`,
+    data: result,
+  });
+});
 
 // @desc create a single Product
 // @route /api/v1/Product/:id

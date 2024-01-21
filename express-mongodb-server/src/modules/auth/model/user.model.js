@@ -44,7 +44,7 @@ const userSchema = new Schema({
   products: [
     {
       type: Schema.Types.ObjectId, //this is relation you can array of products by data populate
-      ref: "products",
+      // ref: "products",
     },
   ],
 });

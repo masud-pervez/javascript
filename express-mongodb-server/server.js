@@ -31,12 +31,20 @@ if (process.env.NODE_ENV === "development") {
 // logger assign
 app.use(logger);
 
+//main route
 mainRoutes(app);
-// app.get('/', (req, res) => {
-//     res.send("Welcome to our ToDo")
-// })
 // error Handler
 app.use(errorHandler);
+
+//root route
+app.get("/", (req, res) => {
+  res.send("Welcome to nodejs server");
+});
+
+//not found route
+app.get("*", (req, res) => {
+  res.send("Not found route");
+});
 // Port
 const PORT = process.env.PORT || 5000;
 const server = app.listen(
