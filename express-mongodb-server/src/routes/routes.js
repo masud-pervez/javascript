@@ -5,7 +5,7 @@ const { AuthGuard } = require("../middlewares/auth.middleware");
 
 // all routes
 module.exports = (app) => {
-  app.use("/api/v1/bootcamp", AuthGuard, bootcamp);
+  app.use("/api/v1/bootcamp", bootcamp);
   app.use("/api/v1/auth", auth);
   app.use("/api/v1/products", AuthGuard, product);
 };

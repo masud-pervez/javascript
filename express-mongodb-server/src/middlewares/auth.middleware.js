@@ -55,8 +55,17 @@ const getSignJwtToken = () => {
   });
 };
 
+const hashedPassword = (password) => {
+  return bcrypt.hash(password, 10);
+};
+
 const mathchPassword = function (enterPassword, user) {
   return bcrypt.compare(enterPassword, user.password);
 };
 
-module.exports = { AuthGuard, isAuthorize, sendCookiesResponse };
+module.exports = {
+  AuthGuard,
+  isAuthorize,
+  sendCookiesResponse,
+  hashedPassword,
+};

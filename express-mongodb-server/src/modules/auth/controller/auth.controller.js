@@ -1,5 +1,10 @@
+const { v4: uuidv4 } = require("uuid");
 const asyncHandler = require("../../../middlewares/async.middleware");
-const { sendCookiesResponse } = require("../../../middlewares/auth.middleware");
+const {
+  sendCookiesResponse,
+  hashedPassword,
+} = require("../../../middlewares/auth.middleware");
+const sendEmail = require("../../../middlewares/sendMail.middleware");
 const User = require("../model/user.model");
 
 // @desc Register User
@@ -110,6 +115,7 @@ exports.logout = asyncHandler(async (req, res, next) => {
 
 exports.getMe = asyncHandler(async (req, res, next) => {
   const user = await User.findById({ _id: req._id });
+
   if (!user) {
     throw new Error("Authorization is not Valid!");
   }
@@ -126,25 +132,69 @@ exports.getMe = asyncHandler(async (req, res, next) => {
 // @access private
 
 //TODO
-exports.forgetPassword = asyncHandler(async (req, res, next) => {
-  // const user = await User.findById({ _id: req._id });
-  // if (!user) {
-  //   throw new Error("Authorization is not Valid!");
-  // }
+exports.forgotPassword = asyncHandler(async (req, res, next) => {
+  const { email } = req.body;
+  const token = uuidv4();
+  // try {
+  const user = await User.findOneAndUpdate(
+    { email },
+    {
+      $set: {
+        resetToken: token,
+        resetTokenExpire: Date.now() + 3600000, // token expires after one hour
+      },
+    }
+  );
+
+  if (!user) {
+    throw new Error("User with this email does not exist");
+  }
+
+  const resetUrl = `${req.protocol}://${req.hostname}/reset-password/${token}`; // your reset password page
+
+  let mailOptions = {
+    to: user.email,
+    from: `${process.env.MAIL_FROM_NAME} <${process.env.MAIL_FROM_ADDRESS}>`,
+    subject: "Password Reset",
+    text: `You are receiving this email because you (or someone else) have requested the reset of the password for your account. Please click on the following link, or paste it into your browser to complete the process within one hour of receiving it: ${resetUrl}`,
+  };
+
+  const sendmail = await sendEmail(mailOptions);
 
   return res.status(200).json({
     success: true,
-    msg: "Forget password",
+    msg: "Forget password successfull. please check your email address",
     data: {},
   });
 });
 
 //TODO
 exports.resetPassword = asyncHandler(async (req, res, next) => {
-  // const user = await User.findById({ _id: req._id });
-  // if (!user) {
-  //   throw new Error("Authorization is not Valid!");
-  // }
+  const { password } = req.body;
+  const { token } = req.params;
+
+  const newPassword = await hashedPassword(password);
+
+  const user = await User.findOneAndUpdate(
+    {
+      resetToken: token,
+      resetTokenExpire: { $gt: Date.now() },
+    },
+    {
+      $set: { password: newPassword, resetToken: null, resetTokenExpire: null },
+    }
+  );
+
+  if (!user) {
+    return res.status(400).send({ message: "Invalid or expired reset token" });
+  }
+
+  // const hashedPassword = await bcrypt.hash(password, 10);
+  // user.password = newPassword;
+  // user.resetToken = undefined;
+  // user.resetTokenExpire = undefined;
+
+  // await user.save();
 
   return res.status(200).json({
     success: true,

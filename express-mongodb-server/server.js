@@ -2,10 +2,10 @@ const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const logger = require("./src/middlewares/logger");
 const colors = require("colors");
 const errorHandler = require("./src/middlewares/errorHandler");
-const cookieParser = require("cookie-parser");
 const app = express();
 
 const { connectDb } = require("./src/config/db");
@@ -52,7 +52,7 @@ const PORT = process.env.PORT || 5000;
 const server = app.listen(
   PORT,
   console.log(
-    colors.green(
+    colors.magenta(
       `Server running in ${process.env.NODE_ENV} Mode on Port ${PORT}`
     )
   )

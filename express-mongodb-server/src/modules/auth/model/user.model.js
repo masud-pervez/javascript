@@ -31,6 +31,9 @@ const userSchema = new Schema({
     required: [true, "please Enter Your password"],
   },
 
+  resetToken: String,
+  resetTokenExpire: Date,
+
   role: {
     type: String,
     required: [true, "please Add a role"],

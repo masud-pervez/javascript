@@ -7,6 +7,9 @@ const {
   getUser,
   deleteUser,
   logout,
+  forgetPassword,
+  forgotPassword,
+  resetPassword,
 } = require("../controller/auth.controller");
 const {
   AuthGuard,
@@ -16,6 +19,8 @@ const {
 const router = express.Router();
 
 router.route("/register").post(register);
+router.route("/forgot-password").post(forgotPassword);
+router.route("/reset-password/:token").post(resetPassword);
 router.route("/login").post(login);
 router.route("/users").get(AuthGuard, isAuthorize, getUsers);
 router.route("/me").get(AuthGuard, getMe);
