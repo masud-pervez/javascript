@@ -5,6 +5,7 @@ const cors = require("cors");
 const logger = require("./src/middlewares/logger");
 const colors = require("colors");
 const errorHandler = require("./src/middlewares/errorHandler");
+const cookieParser = require("cookie-parser");
 const app = express();
 
 const { connectDb } = require("./src/config/db");
@@ -20,6 +21,7 @@ if (process.env.NODE_ENV !== "test") {
   connectDb();
 }
 // middleware
+app.use(cookieParser()); // body parser
 app.use(express.json()); // body parser
 app.use(express.urlencoded({ extended: true }));
 app.use(cors()); // Enable cros

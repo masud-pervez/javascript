@@ -7,12 +7,12 @@ const {
   updateBootcamp,
   deleteBootcamp,
 } = require("../controller/bootcamp.controller");
+const { AuthGuard } = require("../../../middlewares/auth.middleware");
 
-router.route("/").get(getBootcamps).post(createBootcamp);
-
+router.route("/").get(AuthGuard, getBootcamps).post(createBootcamp);
 router
   .route("/:id")
-  .get(getBootcamp)
+  .get(AuthGuard, getBootcamp)
   .put(updateBootcamp)
   .delete(deleteBootcamp);
 

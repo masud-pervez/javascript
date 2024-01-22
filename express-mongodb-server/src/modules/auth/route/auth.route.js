@@ -8,17 +8,19 @@ const {
   deleteUser,
   logout,
 } = require("../controller/auth.controller");
-const AuthGuard = require("../../../middlewares/authGuard");
-const isAuthorize = require("../../../middlewares/authorize");
+const {
+  AuthGuard,
+  isAuthorize,
+} = require("../../../middlewares/auth.middleware");
 
 const router = express.Router();
 
-router.post("/register", register);
-router.post("/login", login);
-router.get("/users", AuthGuard, isAuthorize, getUsers);
-router.get("/me", AuthGuard, getMe);
-router.get("/users/:id", AuthGuard, getUser);
-router.delete("/users/:id", AuthGuard, deleteUser);
-router.delete("/logout", logout);
+router.route("/register").post(register);
+router.route("/login").post(login);
+router.route("/users").get(AuthGuard, isAuthorize, getUsers);
+router.route("/me").get(AuthGuard, getMe);
+router.route("/users/:id").get(AuthGuard, getUser);
+router.route("/users/:id").delete(AuthGuard, deleteUser);
+router.route("/logout").delete(logout);
 
 module.exports = router;

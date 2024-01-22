@@ -1,5 +1,5 @@
 const asyncHandler = require("../../../middlewares/async.middleware");
-const cookiesResponse = require("../../../middlewares/cookies.middleware");
+const { sendCookiesResponse } = require("../../../middlewares/auth.middleware");
 const User = require("../model/user.model");
 
 // @desc Register User
@@ -11,8 +11,15 @@ exports.register = asyncHandler(async (req, res, next) => {
   if (findUser) {
     throw new Error("User already registered");
   }
+
   const newUser = await User.create(req.body);
+
+  if (!newUser) {
+    throw new Error("User Create not successfull");
+  }
+
   const token = newUser.getSignJwtToken();
+  sendCookiesResponse(token, res);
 
   return res.status(200).json({
     success: true,
@@ -43,6 +50,10 @@ exports.getUser = asyncHandler(async (req, res, next) => {
     "products"
   ); //populate is relation array data
 
+  if (!result) {
+    throw new Error("User is not found");
+  }
+
   return res.status(200).json({
     success: true,
     msg: "Get a user",
@@ -69,7 +80,7 @@ exports.login = asyncHandler(async (req, res, next) => {
   }
   const token = oldUser.getSignJwtToken();
 
-  cookiesResponse(token, res);
+  sendCookiesResponse(token, res);
 
   return res.status(200).json({
     success: true,
@@ -82,11 +93,9 @@ exports.login = asyncHandler(async (req, res, next) => {
 // @desc logout User
 // @route /api/v1/auth/logout
 // @access private
-
+//TODO
 exports.logout = asyncHandler(async (req, res, next) => {
-  // const { username, password } = req.body;
-  console.log("req.cookies", req);
-  // Object.entries(req.cookies).forEach(([key, value]) => res.clearCookie(key));
+  Object.entries(req.cookies).forEach(([key, value]) => res.clearCookie(key));
 
   return res.status(200).json({
     success: true,
@@ -94,6 +103,7 @@ exports.logout = asyncHandler(async (req, res, next) => {
     data: null,
   });
 });
+
 // @desc Get me
 // @route /api/v1/auth/me
 // @access private
@@ -108,6 +118,38 @@ exports.getMe = asyncHandler(async (req, res, next) => {
     success: true,
     msg: "Get Me Successfull",
     data: user,
+  });
+});
+
+// @desc Forget password
+// @route /api/v1/auth/forget-password
+// @access private
+
+//TODO
+exports.forgetPassword = asyncHandler(async (req, res, next) => {
+  // const user = await User.findById({ _id: req._id });
+  // if (!user) {
+  //   throw new Error("Authorization is not Valid!");
+  // }
+
+  return res.status(200).json({
+    success: true,
+    msg: "Forget password",
+    data: {},
+  });
+});
+
+//TODO
+exports.resetPassword = asyncHandler(async (req, res, next) => {
+  // const user = await User.findById({ _id: req._id });
+  // if (!user) {
+  //   throw new Error("Authorization is not Valid!");
+  // }
+
+  return res.status(200).json({
+    success: true,
+    msg: "Reset password",
+    data: {},
   });
 });
 

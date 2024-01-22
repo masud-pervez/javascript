@@ -51,6 +51,9 @@ const userSchema = new Schema({
 
 // encript is LockManager, passorid bcrypt
 userSchema.pre("save", async function () {
+  if (!this.isModified("password")) {
+    next();
+  }
   this.password = await bcrypt.hash(this.password, 10);
 });
 
