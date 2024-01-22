@@ -8,11 +8,11 @@ const getSignJwtToken = () => {
   });
 };
 
-const mathchPassword = function (enterPassword, user) {
+const matchPassword = function (enterPassword, user) {
   return bcrypt.compare(enterPassword, user.password);
 };
 
 module.exports = {
   getSignJwtToken,
-  mathchPassword,
+  matchPassword,
 };

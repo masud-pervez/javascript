@@ -78,7 +78,7 @@ userSchema.methods.getSignJwtToken = function () {
 };
 
 // hash password by conpare
-userSchema.methods.mathchPassword = async function (inputPassword) {
+userSchema.methods.matchPassword = async function (inputPassword) {
   return bcrypt.compare(inputPassword, this.password);
 };
 

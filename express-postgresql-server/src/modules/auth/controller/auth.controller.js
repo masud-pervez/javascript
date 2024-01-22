@@ -34,6 +34,6 @@ exports.register = asyncHandler(async (req, res, next) => {
 //   });
 // };
 
-const mathchPassword = function (enterPassword, user) {
+const matchPassword = function (enterPassword, user) {
   return bcrypt.compare(enterPassword, user.password);
 };

@@ -59,7 +59,7 @@ const hashedPassword = (password) => {
   return bcrypt.hash(password, 10);
 };
 
-const mathchPassword = function (enterPassword, user) {
+const matchPassword = function (enterPassword, user) {
   return bcrypt.compare(enterPassword, user.password);
 };
 

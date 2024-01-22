@@ -34,7 +34,7 @@ exports.register = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc Register User
+// @desc Get Users
 // @route /api/v1/auth/users
 // @access public
 exports.getUsers = asyncHandler(async (req, res, next) => {
@@ -47,7 +47,7 @@ exports.getUsers = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc RGet a single user
+// @desc Get a single user
 // @route /api/v1/auth/users/:id
 // @access private
 exports.getUser = asyncHandler(async (req, res, next) => {
@@ -78,7 +78,7 @@ exports.login = asyncHandler(async (req, res, next) => {
     throw new Error(`username ${username} not find `);
   }
 
-  const isMatch = await oldUser.mathchPassword(password);
+  const isMatch = await oldUser.matchPassword(password);
 
   if (!isMatch) {
     throw new Error("Authorization is not Valid!");
@@ -98,7 +98,6 @@ exports.login = asyncHandler(async (req, res, next) => {
 // @desc logout User
 // @route /api/v1/auth/logout
 // @access private
-//TODO
 exports.logout = asyncHandler(async (req, res, next) => {
   Object.entries(req.cookies).forEach(([key, value]) => res.clearCookie(key));
 
@@ -128,14 +127,11 @@ exports.getMe = asyncHandler(async (req, res, next) => {
 });
 
 // @desc Forget password
-// @route /api/v1/auth/forget-password
+// @route /api/v1/auth/forgot-password
 // @access private
-
-//TODO
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
   const { email } = req.body;
   const token = uuidv4();
-  // try {
   const user = await User.findOneAndUpdate(
     { email },
     {
@@ -159,7 +155,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     text: `You are receiving this email because you (or someone else) have requested the reset of the password for your account. Please click on the following link, or paste it into your browser to complete the process within one hour of receiving it: ${resetUrl}`,
   };
 
-  const sendmail = await sendEmail(mailOptions);
+  await sendEmail(mailOptions);
 
   return res.status(200).json({
     success: true,
@@ -168,7 +164,10 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
   });
 });
 
-//TODO
+// @desc Reset password
+// @route /api/v1/auth/reset-password
+// @access private
+
 exports.resetPassword = asyncHandler(async (req, res, next) => {
   const { password } = req.body;
   const { token } = req.params;
@@ -189,17 +188,63 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
     return res.status(400).send({ message: "Invalid or expired reset token" });
   }
 
-  // const hashedPassword = await bcrypt.hash(password, 10);
-  // user.password = newPassword;
-  // user.resetToken = undefined;
-  // user.resetTokenExpire = undefined;
-
-  // await user.save();
-
   return res.status(200).json({
     success: true,
     msg: "Reset password",
     data: {},
+  });
+});
+
+// @desc update password
+// @route /api/v1/auth/update-password
+// @access private
+
+exports.updatePassword = asyncHandler(async (req, res, next) => {
+  const { newPassword, currentPassword } = req.body;
+  const user = await User.findById(req._id).select("password");
+
+  if (!user) {
+    throw new Error("user not found");
+  }
+
+  if (!newPassword || !(await user.matchPassword(currentPassword))) {
+    throw new Error("Password is not currect");
+  }
+
+  const password = await hashedPassword(newPassword);
+
+  const newUser = await User.findOneAndUpdate(
+    {
+      _id: user._id,
+    },
+    {
+      $set: { password },
+    }
+  );
+
+  return res.status(200).json({
+    success: true,
+    msg: "update password",
+    data: newUser,
+  });
+});
+
+// @desc Update a single user
+// @route /api/v1/auth/users/:id
+// @access public
+exports.updateUser = asyncHandler(async (req, res, next) => {
+  const updateData = await User.findOneAndUpdate(
+    {
+      _id: req.params.id,
+    },
+    { $set: req.body },
+    { new: true }
+  );
+
+  return res.status(200).json({
+    success: true,
+    msg: `Update a User of id ${req.params.id}`,
+    data: updateData,
   });
 });
 
