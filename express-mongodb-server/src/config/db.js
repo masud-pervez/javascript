@@ -1,6 +1,6 @@
 
 const mongoose = require("mongoose");
-const connectDb = async () => {
+const connectdb = async () => {
   try {
     await mongoose.connect("mongodb://localhost:27017/practice_mongodb", {
       // useNewUrlParser: true,
@@ -12,5 +12,5 @@ const connectDb = async () => {
 };
 
 module.exports = {
-  connectDb,
+  connectdb,
 };

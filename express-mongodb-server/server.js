@@ -8,7 +8,7 @@ const colors = require("colors");
 const errorHandler = require("./src/middlewares/errorHandler");
 const app = express();
 
-const { connectDb } = require("./src/config/db");
+const { connectdb } = require("./src/config/db");
 // load env vars
 // dotenv.config({ path: './src/config/config.env' });
 dotenv.config();
@@ -18,10 +18,10 @@ const mainRoutes = require("./src/routes/routes");
 
 // Connect to database
 if (process.env.NODE_ENV !== "test") {
-  connectDb();
+  connectdb();
 }
 // middleware
-app.use(cookieParser()); // body parser
+app.use(cookieParser()); // cookie parser
 app.use(express.json()); // body parser
 app.use(express.urlencoded({ extended: true }));
 app.use(cors()); // Enable cros
