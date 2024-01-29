@@ -16,6 +16,7 @@ class LinkList {
   //   }
 
   append(data) {
+    //link list a last add kora
     const newNode = new Node(data);
     if (newNode) {
       this.size += 1;
@@ -34,11 +35,27 @@ class LinkList {
     current.next = newNode;
   }
 
+  find(data) {
+    let current = this.head;
+    let resutl = {};
+    while (current.next) {
+      if (data === current.data) {
+        resutl = current;
+      }
+      current = current.next;
+    }
+
+    console.log("resutl", resutl);
+
+    return resutl;
+  }
+
   prepend(data) {
+    //link list a first add kora
     const newNode = new Node(data);
     if (newNode) {
-        this.size += 1;
-      }
+      this.size += 1;
+    }
     if (newNode) {
       newNode.next = this.head.next;
       this.head = newNode;
@@ -83,11 +100,12 @@ result.append(1);
 result.append(2);
 result.append(3);
 result.append(4);
+result.append(5);
 // console.log("🚀 ~ result2:", result);
 // result.delete(1);
 // console.log("🚀 ~ result2:", result);
 // result.delete(4);
-console.log("🚀 ~ result2:", result);
+// console.log("🚀 ~ result2:", result);
 result.prepend(10);
-console.log("🚀 ~ result2:", result);
-// result.print();
+// console.log("🚀 ~ result2:", result);
+result.find(3);
