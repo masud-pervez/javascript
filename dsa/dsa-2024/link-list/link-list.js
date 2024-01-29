@@ -8,7 +8,7 @@ class Node {
 class LinkList {
   constructor() {
     this.head = null;
-    // this.size = 0;
+    this.size = 0;
   }
 
   //   isEmpty() {
@@ -17,6 +17,9 @@ class LinkList {
 
   append(data) {
     const newNode = new Node(data);
+    if (newNode) {
+      this.size += 1;
+    }
 
     if (!this.head) {
       this.head = newNode;
@@ -33,7 +36,9 @@ class LinkList {
 
   prepend(data) {
     const newNode = new Node(data);
-
+    if (newNode) {
+        this.size += 1;
+      }
     if (newNode) {
       newNode.next = this.head.next;
       this.head = newNode;
