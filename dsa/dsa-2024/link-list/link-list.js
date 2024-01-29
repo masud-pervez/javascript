@@ -45,8 +45,6 @@ class LinkList {
       current = current.next;
     }
 
-    console.log("resutl", resutl);
-
     return resutl;
   }
 
@@ -88,7 +86,7 @@ class LinkList {
 
   print() {
     let current = this.head;
-    while (current) {
+    while (current != null) {
       console.log(current);
       current = current.next;
     }
@@ -108,4 +106,4 @@ result.append(5);
 // console.log("🚀 ~ result2:", result);
 result.prepend(10);
 // console.log("🚀 ~ result2:", result);
-result.find(3);
+result.print();
