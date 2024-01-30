@@ -5,6 +5,7 @@ import product from "@/json-data/product.json";
 export async function GET(request: Request, context: any) {
   const { params } = context;
   //   console.log("🚀 ~ params:", params.productid);
+
   const result = product.find((item) => item.id === +params.productid);
 
   return NextResponse.json({
