@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Gowtam kumar",
+    "role": "Admin",
+    "image": "https://example.com/images/t-shirt.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Gowtam Paul",
+    "role": "Oparetor",
+    "image": "https://example.com/images/t-shirt.jpg"
+  }
+]

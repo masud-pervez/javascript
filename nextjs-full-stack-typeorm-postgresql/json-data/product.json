@@ -1,0 +1,73 @@
+[
+    {
+      "id": 1,
+      "name": "Cozy Cotton T-Shirt",
+      "price": 24.99,
+      "image": "https://example.com/images/t-shirt.jpg",
+      "description": "Super soft and comfortable cotton t-shirt, perfect for everyday wear."
+    },
+    {
+      "id": 2,
+      "name": "Travel Mug",
+      "price": 19.95,
+      "image": "https://example.com/images/travel-mug.jpg",
+      "description": "Leak-proof travel mug keeps your coffee or tea hot on the go."
+    },
+    {
+      "id": 3,
+      "name": "Wireless Headphones",
+      "price": 59.99,
+      "image": "https://example.com/images/wireless-headphones.jpg",
+      "description": "Enjoy crystal-clear sound and freedom from cords with these wireless headphones."
+    },
+    {
+      "id": 4,
+      "name": "Journaling Notebook",
+      "price": 14.95,
+      "image": "https://example.com/images/notebook.jpg",
+      "description": "Stylish and durable notebook for capturing your thoughts and ideas."
+    },
+    {
+      "id": 5,
+      "name": "Backpack",
+      "price": 39.99,
+      "image": "https://example.com/images/backpack.jpg",
+      "description": "Spacious and versatile backpack for school, work, or travel."
+    },
+    {
+      "id": 6,
+      "name": "Sunglasses",
+      "price": 19.95,
+      "image": "https://example.com/images/sunglasses.jpg",
+      "description": "Protect your eyes from the sun with these stylish and affordable sunglasses."
+    },
+    {
+      "id": 7,
+      "name": "Portable Speaker",
+      "price": 29.99,
+      "image": "https://example.com/images/portable-speaker.jpg",
+      "description": "Fill your space with music wherever you go with this portable speaker."
+    },
+    {
+      "id": 8,
+      "name": "Water Bottle",
+      "price": 14.95,
+      "image": "https://example.com/images/water-bottle.jpg",
+      "description": "Stay hydrated in style with this reusable water bottle."
+    },
+    {
+      "id": 9,
+      "name": "Handheld Fan",
+      "price": 12.99,
+      "image": "https://example.com/images/handheld-fan.jpg",
+      "description": "Beat the heat with this compact and powerful handheld fan."
+    },
+    {
+      "id": 10,
+      "name": "Coffee Mug",
+      "price": 9.99,
+      "image": "https://example.com/images/coffee-mug.jpg",
+      "description": "Start your day right with this fun and functional coffee mug."
+    }
+  ]
+  
