@@ -14,9 +14,6 @@ async function bootstrap() {
     logger: getLogLevels(process.env.NODE_ENV === 'production'),
   });
 
-  // const httpAdapter = app.get(HttpAdapterHost);
-  // app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
-
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true, //we can whitelist the acceptable properties, and any property not included in the whitelist is automatically stripped from the resulting object. For example, if our handler expects email and password properties, but a request also includes an age property, this property can be automatically removed from the resulting DTO
@@ -29,6 +26,7 @@ async function bootstrap() {
     origin: true,
     credentials: true,
   });
+  
   app.use(cookieParser());
   app.use(json({ limit: '20mb' })); //this json data send size defiend
   app.use(
