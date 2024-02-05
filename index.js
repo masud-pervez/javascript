@@ -1,0 +1,1 @@
+console.log(10 ** 3); //Exponentiation that mine 10 x 10 = 100 x 10 
