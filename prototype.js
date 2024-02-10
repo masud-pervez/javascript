@@ -1,3 +1,12 @@
+const player = {
+  name: "Gowtam kumar",
+  age: 29,
+  country: "Bangadesh",
+};
+console.log("🚀 ~ player:", player);
+const createObject = Object.create(player);
+console.log("🚀 ~ createObject:", createObject); // result {} blank becouse prototype by doing,
+
 // prototype is noting. just js ar je kono function ar  propertiy je ta object ke point kore
 /// javascript is prototype language. prototype je kaj kore same kaj kore class.
 /// js inharitence hoy prototype ar madome. but onno language inharitence hoy class ar modom diya.
@@ -17,10 +26,10 @@ function Person(name, age) {
 
 Person.prototype = {
   eat() {
-    console.log("I am eating rich");
+    return "I am eating rich";
   },
   sleeping() {
-    console.log("Right now i want to be sleeping!");
+    return "Right now i want to be sleeping!";
   },
 };
 
@@ -35,12 +44,35 @@ function PersonNew(name, age) {
 
 PersonNew.prototype = {
   eat() {
-    console.log("gowtam kum I am eating rich");
+    return "gowtam kum I am eating rich";
   },
   sleeping() {
-    console.log("Right now i want to be sleeping!");
+    return "Right now i want to be sleeping!";
   },
 };
 
 const gowtam = new PersonNew("gowtam kumar", 30);
 console.log(gowtam.eat());
+
+// let,s go convert to class
+
+class ConverClassPerson {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  eat() {
+    return "i am Eating Right";
+  }
+  sleep() {
+    return "I am Sleeping everyday";
+  }
+  play() {
+    return "we are playing everyday";
+  }
+}
+
+const clResult = new ConverClassPerson("Gowtam kumar", 50);
+console.log("🚀 ~ clResult:", clResult.eat());
+
+
