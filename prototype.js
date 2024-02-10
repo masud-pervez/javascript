@@ -3,9 +3,9 @@ const player = {
   age: 29,
   country: "Bangadesh",
 };
-console.log("🚀 ~ player:", player);
+// console.log("🚀 ~ player:", player);
 const createObject = Object.create(player);
-console.log("🚀 ~ createObject:", createObject); // result {} blank becouse prototype by doing,
+// console.log("🚀 ~ createObject:", createObject); // result {} blank becouse prototype by doing,
 
 // prototype is noting. just js ar je kono function ar  propertiy je ta object ke point kore
 /// javascript is prototype language. prototype je kaj kore same kaj kore class.
@@ -17,7 +17,7 @@ console.log("🚀 ~ createObject:", createObject); // result {} blank becouse pr
 // without new keyword example below
 function Person(name, age) {
   //this is constructor function
-  let person = Object.create(Person.prototype); //this is the inharitence prototype
+  let person = Object.create(Person.prototype); //this is the inharitence prototype ata
   person.name = name;
   person.age = age;
 
@@ -34,7 +34,7 @@ Person.prototype = {
 };
 
 const newPerson = Person("gowtam kumar", 30);
-console.log(newPerson.eat());
+// console.log(newPerson.eat());
 
 // new keyword example below
 function PersonNew(name, age) {
@@ -52,7 +52,7 @@ PersonNew.prototype = {
 };
 
 const gowtam = new PersonNew("gowtam kumar", 30);
-console.log(gowtam.eat());
+// console.log(gowtam.eat());
 
 // let,s go convert to class
 
@@ -73,6 +73,4 @@ class ConverClassPerson {
 }
 
 const clResult = new ConverClassPerson("Gowtam kumar", 50);
-console.log("🚀 ~ clResult:", clResult.eat());
-
-
+// console.log("🚀 ~ clResult:", clResult.eat());
