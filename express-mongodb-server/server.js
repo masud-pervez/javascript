@@ -40,7 +40,7 @@ app.use(errorHandler);
 
 //root route
 app.get("/", (req, res) => {
-  res.send("Welcome to nodejs server");
+  res.send("Welcome to nodejs server!");
 });
 
 //not found route
