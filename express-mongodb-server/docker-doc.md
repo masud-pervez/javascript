@@ -7,6 +7,8 @@
 
 ## docker build: 
     docker build .
+## build docker with tag name:
+    docker build -t learn-docker . (t means tag)
 
 ## all container show: 
     docker ps -a
@@ -55,3 +57,9 @@
 
  ## all local image delete: 
     docker image prune -a
+
+
+## docker volume:
+    docker volume --help
+
+
