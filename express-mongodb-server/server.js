@@ -21,16 +21,16 @@ if (process.env.NODE_ENV !== "test") {
   connectdb();
 }
 // middleware
-app.use(cookieParser()); // cookie parser
-app.use(express.json()); // body parser
-app.use(express.urlencoded({ extended: true }));
-app.use(cors()); // Enable cros
+app.use(cookieParser()); // cookie parser when we needed the cookies value then we simply get and set
+app.use(express.json()); // you ensure that your express application can handle json data sent in the request body automatically
+app.use(express.urlencoded({ extended: true })); // it parses incoming request with url-encoded payloads and is based on a body parser.
+app.use(cors()); // cros for different http method enable
 
 // Dev logging middleware
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-// logger assign
+// logger assign 
 app.use(logger);
 
 //main route
