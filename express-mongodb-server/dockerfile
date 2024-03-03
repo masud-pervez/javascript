@@ -1,3 +1,4 @@
+### Stage 1 ###
 FROM node:21.6.2-alpine3.18
 
 WORKDIR /app
@@ -5,9 +6,12 @@ WORKDIR /app
 COPY package.json /app
 
 RUN npm install
+# RUN npm run build
 
 COPY . .
 
 EXPOSE 3900
 
 CMD [ "node","server.js" ]
+
+### Stage 2 ###

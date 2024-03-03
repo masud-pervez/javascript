@@ -18,7 +18,10 @@
 
 ## docker run:
     docker run -p 3900:4100/3900 imageId
+   
     docker run gowtamkumar/learn-docker
+## docker run background and create container and image
+ docker run -d -p 3900:4100 --name nodecontainer node
 
 ## docker container start: 
     docker start containername
@@ -58,8 +61,39 @@
  ## all local image delete: 
     docker image prune -a
 
-
 ## docker volume:
     docker volume --help
 
+
+
+## docker unnecssery file remove
+docker system prune -a
+
+## pwd is route:
+pwd
+## check ip
+ip a
+
+## docker commands 
+    docker -version
+    docker images
+    docker ps
+    docker ps -a
+    docker run -d -p 3900:3900 image
+    docker stop container_id
+    docker rm container_id
+    docker rmi image_id
+    docker start cotnainer_id
+    docker logs -f container_id
+    docker logs -since=2h -f container_id
+    docker exec -it container_id bash
+    docker pull imagename
+
+## docker compose commond
+    docker-compose up
+    docker-compose up -d
+    docker-compose rm
+    docker-compose down
+
+## docker architecture
 
