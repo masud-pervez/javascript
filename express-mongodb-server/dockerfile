@@ -12,6 +12,6 @@ COPY . .
 
 EXPOSE 3900
 
-CMD [ "node","server.js" ]
+CMD [ "npm","dev" ]
 
 ### Stage 2 ###
