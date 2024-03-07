@@ -115,7 +115,7 @@
     flushall
     exec
 
-## redis pubsub 
+## redis pubsub
 
     subscribe news
     publish news "Hello world"
@@ -124,6 +124,34 @@
 
 ## redis scripts
 
+## connection and security (select 0 and 1 deffirent database)
 
-## connection and security
-    
+    echo message
+    select 0
+    select 1
+
+    <!-- #select 0 -->
+    set name gowtamkumar
+    <!-- check value -->
+    get name
+    result is gowtamkumr
+
+    <!-- #select 1 -->
+    switch database and set data and get data you can see result
+
+    client list
+    client setname thisterminal
+    client getname
+    client kill id 5
+    config set requirepass gowtampaul30 (auth and set password)
+    auth gowtampaul30(if you want to access anather terminal)
+
+## redis Geospatial
+
+
+## connection remote redis server
+    redis-cli -h 127.0.01 -p 6379
+
+## redis benchmark
+    redis-benchmark -n 1000
+    redis-benchmark -n 1000 -d 1000000
