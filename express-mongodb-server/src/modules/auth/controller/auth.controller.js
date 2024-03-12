@@ -24,7 +24,11 @@ exports.register = asyncHandler(async (req, res, next) => {
   }
 
   const token = newUser.getSignJwtToken();
-  sendCookiesResponse(token, res);
+  const cookies = sendCookiesResponse(token, res);
+  
+  if (!cookies) {
+    throw new Error("Token not set in cookies");
+  }
 
   return res.status(200).json({
     success: true,

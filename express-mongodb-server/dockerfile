@@ -1,3 +1,4 @@
+ARG DEFAULT_PORT=3900
 ### Stage 1 ###
 FROM node:21.6.2-alpine3.18
 
@@ -10,8 +11,8 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3900
+ENV PORT $DEFAULT_PORT
 
-CMD [ "npm","dev" ]
+EXPOSE $PORT
 
-### Stage 2 ###
+CMD [ "npm", "run", "dev" ]
