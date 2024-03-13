@@ -132,4 +132,11 @@ ip a
 ## docker architecture
 
 ## docker volumes
+
     docker volume create volume name
+
+## docker app to docker mongo connection wiht(mongodb "localhost" replace "host.docker.internal")
+
+    mongodb://localhost:27017/practice_mongodb
+    replace to
+    mongodb://host.docker.internal:27017/practice_mongodb
