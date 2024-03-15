@@ -1,5 +1,3 @@
-import { AppDataSource } from "@/config/db/pg-connection";
-import { TodosEntity } from "@/typeorm/todos/todos-entity";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request, context: any) {
@@ -7,21 +5,10 @@ export async function GET(request: Request, context: any) {
     params: { id },
   } = context;
 
-  const todoRepository = AppDataSource.getRepository(TodosEntity);
-
-  const result = await todoRepository.findOneBy({ id });
-
-  if (!result) {
-    return NextResponse.json({
-      status: 400,
-      message: "Todo not found",
-    });
-  }
-
   return NextResponse.json({
     status: 200,
     message: "Get a single Todo",
-    data: result,
+    data: [],
   });
 }
 
@@ -30,21 +17,10 @@ export async function DELETE(request: Request, context: any) {
     params: { id },
   } = context;
 
-  const todoRepository = AppDataSource.getRepository(TodosEntity);
-
-  const newData = await todoRepository.delete(id);
-
-  if (!newData) {
-    return NextResponse.json({
-      status: 400,
-      message: "Todo not found",
-    });
-  }
-
   return NextResponse.json({
     status: 200,
     message: "Todo Delete Successfully",
-    data: newData,
+    data: {},
   });
 }
 
@@ -54,24 +30,9 @@ export async function PATCH(request: Request, context: any) {
   } = context;
   const data = await request.json();
 
-  const todoRepository = AppDataSource.getRepository(TodosEntity);
-
-  const findData = await todoRepository.findOneBy({ id });
-
-  if (!findData) {
-    return NextResponse.json({
-      status: 400,
-      message: "Todo not found",
-    });
-  }
-
-  const updateData = await todoRepository.merge(findData, data);
-
-  const result = await AppDataSource.manager.save(updateData);
-
   return NextResponse.json({
     status: 200,
     message: "Todo update Successfully",
-    data: result,
+    data: data,
   });
 }
