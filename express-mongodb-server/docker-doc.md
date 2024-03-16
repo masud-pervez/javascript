@@ -140,3 +140,13 @@ ip a
     mongodb://localhost:27017/practice_mongodb
     replace to
     mongodb://host.docker.internal:27017/practice_mongodb
+
+
+## connection database container and app container  cross container communication
+   docker run -d --rm -e NODE_ENV="development" -e PORT="3900" -e JWT_SECRET="dfasd" -e JWT_EXPIRES="7d" -e COOKIE_EXPIRES=7 -p 3900:3900 --name node-mongo-container appimage
+
+    docker container imspect containername then id address sate connection korle done
+    mongodb://idAddress:27017/practice_mongodb
+
+
+## 

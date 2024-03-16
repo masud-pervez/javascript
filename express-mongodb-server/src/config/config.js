@@ -11,7 +11,7 @@ const configEnvSchema = Joi.object()
       .valid("production", "development", "test")
       .required(),
     PORT: Joi.number().default(3900).required(),
-    SSL: Joi.boolean().required().description("Is deployed with ssl"),
+    SSL: Joi.boolean().description("Is deployed with ssl"),
     AUTH: Joi.boolean()
       .default(true)
       .description("Is auth is required to access apis"),
@@ -19,7 +19,7 @@ const configEnvSchema = Joi.object()
     DB_PORT: Joi.number().description("Database port"),
     DB_USERNAME: Joi.string().description("Database username"),
     DB_PASSWORD: Joi.string().description("Database password"),
-    DB_NAME: Joi.string().required().description("SQL Database name"),
+    DB_NAME: Joi.string().description("SQL Database name"),
     JWT_SECRET: Joi.string().required().description("JWT secret key"),
     JWT_EXPIRES: Joi.string()
       .default("7d")
@@ -30,7 +30,7 @@ const configEnvSchema = Joi.object()
       .required()
       .description("days after which cookie expire"),
     DB_BACKUP_PATH: Joi.string().description("Database file backup path"),
-    UPLOAD_PATH: Joi.string().required().description("File/photo upload path"),
+    // UPLOAD_PATH: Joi.string().required().description("File/photo upload path"),
     MAX_FILE_UPLOAD: Joi.number()
       .default(1000000)
       .description("Maxium limit of file upload"),
