@@ -1,18 +1,21 @@
-import { NextRequest, NextResponse } from "next/server";
-
-import { getSignJwtToken, hashedPassword } from "@/middlewares/auth.middleware";
+import "reflect-metadata";
+import { NextResponse } from "next/server";
+import { hashedPassword } from "@/middlewares/auth.middleware";
+import { UsersEntity } from "@/typeorm/users/user-entity";
+import { getDBConnection } from "@/config/db/db-connection";
 
 export async function POST(request: Request) {
   const data = await request.json();
+  const connection = await getDBConnection();
 
-  // const userRepository = await AppDataSource.getRepository(UsersEntity);
+  const user = await connection.getRepository(UsersEntity);
 
-  // const newUser = userRepository.create({
-  //   ...data,
-  //   password: hashedPassword(data.password),
-  // });
+  const newUser = user.create({
+    ...data,
+    password: hashedPassword(data.password),
+  });
 
-  // const result = await userRepository.save(newUser);
+  const result = await user.save(newUser);
 
   return NextResponse.json({
     message: "Create new User",
@@ -22,14 +25,15 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-  // const userRepository = await AppDataSource.getRepository(UsersEntity);
+  const connection = await getDBConnection();
+  const user = await connection.getRepository(UsersEntity);
 
-  // const result = await userRepository.find();
+  const result = await user.find();
 
   return NextResponse.json({
     status: 200,
-    message: "success get users",
+    message: "Get a users",
     length: 100,
-    data: {},
+    data: result,
   });
 }

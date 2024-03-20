@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "emitDecoratorMetadata": true, //for typeorm
-    "experimentalDecorators": true,//for typeorm
+    "experimentalDecorators": true, //for typeorm
+    "strictPropertyInitialization": false,
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -17,13 +18,19 @@
     "plugins": [
       {
         "name": "next"
-      },
-      
+      }
     ],
     "paths": {
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "typeorm/todos/photo-entity.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "typeorm/todos/photo-entity.js"
+  ],
+
   "exclude": ["node_modules"]
 }
